@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS debt
  paid        boolean NOT NULL DEFAULT false,
  date        date NULL,
  CONSTRAINT PK_debt PRIMARY KEY ( "id" ),
- CONSTRAINT FK_39 FOREIGN KEY ( user_id ) REFERENCES user ( user_id )
+ CONSTRAINT FK_39 FOREIGN KEY ( user_id ) REFERENCES "user" ( user_id )
 );
 
 CREATE INDEX fkIdx_40 ON debt
