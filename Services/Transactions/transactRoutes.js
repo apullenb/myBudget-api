@@ -1,15 +1,15 @@
 const express = require('express');
 const path =require('path')
-const Services = require('./incomeService');
+const Services = require('./transactService');
 const authorization = require('../../utils/authorization');
 
 
 
 const jsonParser=express.json();
-const incomeRouter = express.Router();
+const transactRouter = express.Router();
 
 
-incomeRouter
+transactRouter
 .get('/', authorization, async (req, res) => { 
 
   try {
@@ -23,20 +23,20 @@ incomeRouter
   }
 })
   
-incomeRouter
+transactRouter
   .post('/', jsonParser, authorization, (req, res) => {
-    const {source, amount, date} = req.body;
-    const newIncome = {source, amount, date};
+    const {name, amount, date, category} = req.body;
+    const newTransact = {name, amount, date, category};
     
-    for (const [key, value] of Object.entries(newIncome))
+    for (const [key, value] of Object.entries(newTransact))
       if (value === null || undefined || '')
         return res.status(400).json({
           error: `Missing Value for '${key}' `
         })
-    newIncome.user_id = req.user  
-    Services.addNewIncome(
+    newTransact.user_id = req.user  
+    Services.addNewTransact(
       req.app.get('db'),
-      newIncome
+      newTransact
     )
       .then(entry => {
         res
@@ -45,6 +45,4 @@ incomeRouter
           .json(entry)
       })
     })
-
-
-module.exports = incomeRouter;
+    module.exports = transactRouter;

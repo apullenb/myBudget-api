@@ -8,6 +8,7 @@ const userRouter = require('./Services/Users/userRoutes');
 const billsRouter = require('./Services/Bills/billsRoutes');
 const debtRouter = require('./Services/Debt/debtRoutes');
 const incomeRouter = require('./Services/Income/incomeRoutes');
+const transactRouter = require('./Services/Transactions/transactRoutes');
 const app = express();
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common';
 
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use('/api/bills', billsRouter);
 app.use('/api/users', userRouter);
 app.use('/api/debt', debtRouter);
+app.use('/api/transactions', transactRouter);
 app.use('/api/income', incomeRouter);
 
 app.get('/', (req, res) => {
