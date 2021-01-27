@@ -25,8 +25,8 @@ incomeRouter
   
 incomeRouter
   .post('/', jsonParser, authorization, (req, res) => {
-    const {source, amount, date} = req.body;
-    const newIncome = {source, amount, date};
+    const {source, amount, date, month} = req.body;
+    const newIncome = {source, amount, date, month};
     
     for (const [key, value] of Object.entries(newIncome))
       if (value === null || undefined || '')
