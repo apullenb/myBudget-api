@@ -4,10 +4,10 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
-// const userRouter = require('./Services/Users/userRoutes');
+const userRouter = require('./Services/Users/userRoutes');
 const billsRouter = require('./Services/Bills/billsRoutes');
-// const journalRouter = require('./Services/JournalServices/routes');
-
+const debtRouter = require('./Services/Debt/debtRoutes');
+const incomeRouter = require('./Services/Income/incomeRoutes');
 const app = express();
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common';
 
@@ -19,8 +19,9 @@ app.use(express.json());
 
 // Routers:
 app.use('/api/bills', billsRouter);
-// app.use('/api/users', userRouter);
-// app.use('/api/journal', journalRouter);
+app.use('/api/users', userRouter);
+app.use('/api/debt', debtRouter);
+app.use('/api/income', incomeRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello, world!');
