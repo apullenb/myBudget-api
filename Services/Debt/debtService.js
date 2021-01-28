@@ -18,8 +18,11 @@ const DebtServices = {
   },
   updateDebt(knex, id, newDebtFields) {
     return knex('debt')
-      .where(id)
-      .update(newDebtFields);
+      .where('id', id)
+      .update(newDebtFields)
+      .then(rows => {
+        return rows[0];
+      });
   },
   
   deleteDebt(knex, id) {

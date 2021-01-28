@@ -46,10 +46,26 @@ billsRouter
       })
     })
 
+    billsRouter
+    .patch('/:id', jsonParser, authorization, (req, res) => {
+      const {id} = req.params;
+     const paid = req.body;
+     console.log(paid, id)
+     Services.updateBill(
+        req.app.get('db'), id, paid
+      )
+      .then(() => {
+        res
+          .status(201)
+          .json()
+        })
+        
+    });
+
 billsRouter
   .delete('/:id', authorization, (req, res, next) => {
-    const id = req.params;
-   
+    const {id} = req.params
+   console.log(id)
    Services.deleteBill(
       req.app.get('db'), id,
     )

@@ -21,6 +21,7 @@ incomeRouter
   }
 })
   
+
 incomeRouter
   .post('/', jsonParser, authorization, (req, res) => {
     const {source, amount, date, month} = req.body;
@@ -43,9 +44,25 @@ incomeRouter
           .json(entry)
       })
     })
+
+
+    incomeRouter
+    .patch('/:id', authorization, (req, res, next) => {
+      const {id} = req.params;
+     const paid = req.body;
+     Services.updateIncome(
+        req.app.get('db'), id, paid
+      )
+        .then(() => {
+          res.status(204).end();
+        })
+        .catch(next);
+    });
+
+
     incomeRouter
     .delete('/:id', authorization, (req, res, next) => {
-      const id = req.params;
+      const {id} = req.params;
      
      Services.deleteIncome(
         req.app.get('db'), id,

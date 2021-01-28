@@ -18,7 +18,7 @@ const IncomeServices = {
   },
   updateIncome(knex, id, newIncomeFields) {
     return knex('income')
-      .where(id)
+      .where('id', id)
       .update(newIncomeFields);
   },
   

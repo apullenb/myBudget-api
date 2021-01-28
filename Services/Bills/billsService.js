@@ -18,7 +18,7 @@ const BillServices = {
   },
   updateBill(knex, id, newBillFields) {
     return knex('bills')
-      .where(id)
+      .where('id', id)
       .update(newBillFields);
   },
 
