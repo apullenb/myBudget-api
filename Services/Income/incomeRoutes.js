@@ -11,7 +11,6 @@ const incomeRouter = express.Router();
 
 incomeRouter
 .get('/', authorization, async (req, res) => { 
-
   try {
       const user = await Services.getById(req.app.get('db'), req.user)
      
@@ -19,7 +18,6 @@ incomeRouter
   } catch (err) {
       console.error(err.message);
       res.status(500).json('server error');
-      
   }
 })
   
@@ -45,6 +43,17 @@ incomeRouter
           .json(entry)
       })
     })
-
+    incomeRouter
+    .delete('/:id', authorization, (req, res, next) => {
+      const id = req.params;
+     
+     Services.deleteIncome(
+        req.app.get('db'), id,
+      )
+        .then(() => {
+          res.status(204).end();
+        })
+        .catch(next);
+    });
 
 module.exports = incomeRouter;

@@ -13,10 +13,12 @@ const app = express();
 const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common';
 
 // Middleware:
+
 app.use(cors());
-app.use(morgan(morganOption));
 app.use(helmet());
+app.use(morgan(morganOption));
 app.use(express.json());
+
 
 // Routers:
 app.use('/api/bills', billsRouter);

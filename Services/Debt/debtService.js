@@ -24,7 +24,7 @@ const DebtServices = {
   
   deleteDebt(knex, id) {
     return knex('debt')
-      .where(id)
+      .where('id', id)
       .delete();
   },
 };

@@ -25,8 +25,8 @@ billsRouter
   
 billsRouter
   .post('/', jsonParser, authorization, (req, res) => {
-    const {name, bill_amt, amt_paid, month, paid} = req.body;
-    const newBill = {name, bill_amt, amt_paid, month, paid};
+    const {bill_name, bill_amt, amt_paid, month} = req.body;
+    const newBill = {bill_name, bill_amt, amt_paid, month};
     
     for (const [key, value] of Object.entries(newBill))
       if (value === null || undefined || '')
@@ -47,30 +47,11 @@ billsRouter
     })
 
 billsRouter
-  .route('/:user_id')
-  .all((req, res, next) => {
-    Services.getById(
-      req.app.get('db'),
-      req.params.user_id
-    )
-      .then(entry => {
-        if (!entry) {
-          return res.status(404).json({
-            error: { message: 'Does not exist' }
-          })
-        }
-        res.entry = entry
-        next()
-      })
-      .catch(next)
-  })
-    
-  .delete((req, res, next) => {
-    const { id } = req.params;
-
+  .delete('/:id', authorization, (req, res, next) => {
+    const id = req.params;
+   
    Services.deleteBill(
-      req.app.get('db'),
-      id
+      req.app.get('db'), id,
     )
       .then(() => {
         res.status(204).end();

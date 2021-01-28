@@ -24,7 +24,7 @@ const IncomeServices = {
   
   deleteIncome(knex, id) {
     return knex('income')
-      .where(id)
+      .where('id', id)
       .delete();
   },
 };

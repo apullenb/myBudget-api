@@ -24,7 +24,7 @@ const BillServices = {
 
   deleteBill(knex, id) {
     return knex('bills')
-      .where(id)
+      .where('id', id)
       .delete();
   },
 };
