@@ -84,12 +84,14 @@ userRouter
 })
 
   userRouter
-  .route('/')
-  .get((req, res, next) => {
+  .get('/' , authorization, (req, res, next) => {
+    const id = req.user 
+    console.log(req.user)
     const knexInstance = req.app.get('db');
-    Services.getAllUsers(knexInstance)
-      .then(users => {
-        res.json(users.map(serializeUser));
+    Services.getUserDash(knexInstance, id)
+      .then(user => {
+        console.log(user)
+        res.json(user);
       })
       .catch(next);
   });

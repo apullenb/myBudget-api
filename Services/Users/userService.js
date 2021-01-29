@@ -42,7 +42,7 @@ const Services= {
 
   getUserDash(knex, id) {
     return knex
-      .select('user_name')
+      .select('first_name')
       .from('user')
       .where('user_id', id)
       .first();
