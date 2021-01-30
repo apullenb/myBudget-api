@@ -10,26 +10,29 @@ const debtRouter = require('./Services/Debt/debtRoutes');
 const incomeRouter = require('./Services/Income/incomeRoutes');
 const transactRouter = require('./Services/Transactions/transactRoutes');
 const app = express();
-const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common';
+
+
 
 // Middleware:
-
-app.use(cors());
-app.use(helmet());
+const morganOption = (NODE_ENV === 'production') ? 'tiny' : 'common';
 app.use(morgan(morganOption));
+app.use(helmet());
+
+
+
+
+
 app.use(express.json());
+app.use(cors());
 
 
-// Routers:
+
+// Routes:
 app.use('/api/bills', billsRouter);
 app.use('/api/users', userRouter);
 app.use('/api/debt', debtRouter);
 app.use('/api/transactions', transactRouter);
 app.use('/api/income', incomeRouter);
-
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
-});
 
 
 app.use(function errorHandler(error, req, res, next) {
