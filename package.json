@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require test/setup.js",
-    "dev": "nodemon server.js",
+    "test":  "node ./node_modules/mocha/bin/mocha",
     "start": "node server.js",
-    "predeploy": "npm audit",
+    "dev": "nodemon src/server.js",
+    "migrate": "postgrator --config postgrator-config.js",
+    "migrate:production": "env SSL=true DATABASE_URL=$(heroku config:get DATABASE_URL) heroku run npm run migrate",
+    "predeploy": "npm audit && npm run migrate:production",
     "deploy": "git push heroku master",
-    "migrate": "postgrator --config postgrator-config.js"
+    "postdeploy": "npm run migrate:production"
   },
   "keywords": [],
   "author": "",
