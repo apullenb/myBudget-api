@@ -9,12 +9,6 @@ This app can be viewed live @ https://divvy.vercel.app/
 
 ***
 
-> ![Home](/ScreenShots/Home%20Screen.jpg)
-> ![Dashboard](/ScreenShots/Divvy%20User%20Dash.jpg)
-> ![Add Bills](/ScreenShots/Add%20Bills.jpg)
-
-***
-
 ## API Documentation:
 > ** In order to Access This Information, A User Must Be Authenticated ** 
 #### GET /api/bills
