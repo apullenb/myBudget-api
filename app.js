@@ -1,8 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
-const cors = require('cors');
 const helmet = require('helmet');
+const cors = require('cors');
 const { NODE_ENV } = require('./config');
 const userRouter = require('./Services/Users/userRoutes');
 const billsRouter = require('./Services/Bills/billsRoutes');
@@ -12,7 +12,7 @@ const transactRouter = require('./Services/Transactions/transactRoutes');
 const app = express();
 
 // Middleware:
-const morganOption = NODE_ENV === 'production' ? 'tiny' : 'common';
+const morganOption = 'common';
 app.use(morgan(morganOption));
 app.use(helmet());
 

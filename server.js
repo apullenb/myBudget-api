@@ -3,10 +3,10 @@ const knex = require('knex');
 const cors = require('cors');
 const { DATABASE_URL } = require('./config');
 
-
+app.use(cors());
 const PORT = process.env.PORT;
 
-app.use(cors());
+
 
 const db = knex({
   client: 'pg',
